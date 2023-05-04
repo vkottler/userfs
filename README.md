@@ -2,7 +2,7 @@
     =====================================
     generator=datazen
     version=3.1.2
-    hash=605284d3174ef737937a73768df6f028
+    hash=f1c61277d16003f76da1aef24bfda4e4
     =====================================
 -->
 
@@ -27,6 +27,7 @@ This package is tested with the following Python minor versions:
 * [`python3.8`](https://docs.python.org/3.8/)
 * [`python3.9`](https://docs.python.org/3.9/)
 * [`python3.10`](https://docs.python.org/3.10/)
+* [`python3.11`](https://docs.python.org/3.11/)
 
 ## Platform Support
 
@@ -43,7 +44,7 @@ This package is tested on the following platforms:
 ```
 $ ./venv3.11/bin/ufs -h
 
-usage: ufs [-h] [--version] [-v] [-C DIR] {noop} ...
+usage: ufs [-h] [--version] [-v] [-C DIR] {fetch,noop} ...
 
 A system-bootstrapping automation and introspection tool.
 
@@ -54,7 +55,8 @@ options:
   -C DIR, --dir DIR  execute from a specific directory
 
 commands:
-  {noop}             set of available commands
+  {fetch,noop}       set of available commands
+    fetch            attempt to obtain some software from the internet
     noop             command stub (does nothing)
 
 ```
