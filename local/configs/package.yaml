@@ -1,0 +1,10 @@
+---
+name: userfs
+version: "{{major}}.{{minor}}.{{patch}}"
+description: A system-bootstrapping automation and introspection tool.
+entry: {{entry}}
+requirements:
+  - vcorelib
+dev_requirements:
+  - setuptools-wrapper
+  - types-setuptools
