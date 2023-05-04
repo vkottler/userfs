@@ -4,7 +4,13 @@ version: "{{major}}.{{minor}}.{{patch}}"
 description: A system-bootstrapping automation and introspection tool.
 entry: {{entry}}
 requirements:
+  - gitPython
   - vcorelib
+  - rcmpy
 dev_requirements:
   - setuptools-wrapper
   - types-setuptools
+
+commands:
+  - name: fetch
+    description: attempt to obtain some software from the internet

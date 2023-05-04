@@ -30,16 +30,6 @@ renders:
       - renders-python_readme_dep_graph.md
       - commands-help
 
-  - name: app.py
-    output_dir: "{{project}}"
-    dependencies:
-      - compiles-python
-
-  - name: all.py
-    output_dir: "{{project}}/commands"
-    dependencies:
-      - compiles-python
-
 groups:
   - name: all
     dependencies:

@@ -1,3 +1,9 @@
+# =====================================
+# generator=datazen
+# version=3.1.2
+# hash=6b8d7773adb61a955438889b00b5cf7c
+# =====================================
+
 """
 This package's command-line entry-point application.
 """
