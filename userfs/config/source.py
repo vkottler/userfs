@@ -5,7 +5,7 @@ A module implementing a data structure for project sources.
 # built-in
 from dataclasses import dataclass
 from enum import Enum
-from typing import Optional, cast
+from typing import Any, Dict, Optional, cast
 
 # third-party
 from vcorelib.io import JsonObject
@@ -28,6 +28,7 @@ class SourceSpecification:
     user: str
     port: Optional[int]
     host: str
+    attributes: Dict[str, Any]
 
     @staticmethod
     def from_json(data: JsonObject) -> "SourceSpecification":
@@ -40,4 +41,5 @@ class SourceSpecification:
             cast(str, data["user"]),
             cast(int, data.get("port")),
             cast(str, data["host"]),
+            cast(Dict[str, Any], data.get("attributes", {})),
         )

@@ -27,3 +27,7 @@ properties:
 
   host:
     type: string
+
+  # Additional attributes that the package implementation may or may not use.
+  attributes:
+    type: object

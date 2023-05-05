@@ -3,34 +3,21 @@ A module for interfacing with projects.
 """
 
 # built-in
-from enum import Enum, auto
 from multiprocessing import Pool
 from pathlib import Path
 from typing import Iterable, NamedTuple
 
 # internal
 from userfs.build import build
-from userfs.config import Config, Interact, ProjectSpecification
+from userfs.config import (
+    Config,
+    Interact,
+    ProjectInteraction,
+    ProjectSpecification,
+)
 from userfs.deploy import deploy
 from userfs.fetch import fetch
 from userfs.update import update
-
-
-class ProjectInteraction(Enum):
-    """Kinds of project interactions."""
-
-    FETCH = auto()
-    UPDATE = auto()
-    BUILD = auto()
-    DEPLOY = auto()
-
-
-INTERACTIONS = {
-    ProjectInteraction.FETCH: fetch,
-    ProjectInteraction.UPDATE: update,
-    ProjectInteraction.BUILD: build,
-    ProjectInteraction.DEPLOY: deploy,
-}
 
 
 class ProjectInteractionTask(NamedTuple):
@@ -45,7 +32,18 @@ class ProjectInteractionTask(NamedTuple):
 
     def interact(self, interaction: Interact) -> None:
         """Run a project-interaction method."""
-        interaction(self.root, self.project)
+
+        self.project.logger.info("Starting '%s'.", self.kind.value)
+        interaction(self.root, self.project, self.project.options[self.kind])
+        self.project.logger.info("Finished '%s'.", self.kind.value)
+
+
+INTERACTIONS = {
+    ProjectInteraction.FETCH: fetch,
+    ProjectInteraction.UPDATE: update,
+    ProjectInteraction.BUILD: build,
+    ProjectInteraction.DEPLOY: deploy,
+}
 
 
 def interact(task: ProjectInteractionTask) -> None:

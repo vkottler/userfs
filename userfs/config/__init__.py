@@ -17,12 +17,13 @@ from vcorelib.paths import Pathlike, find_file, normalize
 
 # internal
 from userfs import PKG_NAME
-from userfs.config.project import ProjectSpecification
+from userfs.config.project import ProjectInteraction, ProjectSpecification
 from userfs.config.source import SourceKind, SourceSpecification
 from userfs.schemas import UserfsDictCodec as _UserfsDictCodec
 
-Interact = Callable[[Path, ProjectSpecification], None]
+Interact = Callable[[Path, ProjectSpecification, Dict[str, Any]], None]
 __all__ = [
+    "ProjectInteraction",
     "ProjectSpecification",
     "SourceSpecification",
     "Config",

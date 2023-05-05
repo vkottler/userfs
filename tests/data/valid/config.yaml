@@ -10,11 +10,17 @@ projects:
   config:
     source: github
     path: vkottler
-    options:
+
+    fetch: &shallow
       branch: master
+      single-branch: true
+      depth: 1
 
   runtimepy:
     source: github
     path: vkottler
-    options:
-      branch: master
+
+    fetch: *shallow
+    attributes:
+      python: true
+      mk: true
