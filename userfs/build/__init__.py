@@ -2,6 +2,8 @@
 A module for building project sources.
 """
 
+from __future__ import annotations
+
 # built-in
 from pathlib import Path
 from typing import Dict, Any, List
