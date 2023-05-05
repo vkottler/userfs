@@ -1,7 +1,7 @@
 # =====================================
 # generator=datazen
 # version=3.1.2
-# hash=941aadeb24c126b72884017b219348b1
+# hash=8d592d09e24fbd48e6c5c10d74db740e
 # =====================================
 
 """
@@ -16,6 +16,7 @@ from typing import Tuple as _Tuple
 from vcorelib.args import CommandRegister as _CommandRegister
 
 # internal
+from userfs.commands.build import add_build_cmd
 from userfs.commands.fetch import add_fetch_cmd
 
 
@@ -23,6 +24,11 @@ def commands() -> _List[_Tuple[str, str, _CommandRegister]]:
     """Get this package's commands."""
 
     return [
+        (
+            "build",
+            "attempt to build a software project from its sources",
+            add_build_cmd,
+        ),
         (
             "fetch",
             "attempt to obtain some software from the internet",

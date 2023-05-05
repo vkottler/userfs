@@ -12,5 +12,7 @@ dev_requirements:
   - types-setuptools
 
 commands:
+  - name: build
+    description: attempt to build a software project from its sources
   - name: fetch
     description: attempt to obtain some software from the internet

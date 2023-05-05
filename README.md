@@ -2,11 +2,11 @@
     =====================================
     generator=datazen
     version=3.1.2
-    hash=f1c61277d16003f76da1aef24bfda4e4
+    hash=035acc9a20df17a172151cf57e984c39
     =====================================
 -->
 
-# userfs ([0.1.0](https://pypi.org/project/userfs/))
+# userfs ([0.2.0](https://pypi.org/project/userfs/))
 
 [![python](https://img.shields.io/pypi/pyversions/userfs.svg)](https://pypi.org/project/userfs/)
 ![Build Status](https://github.com/vkottler/userfs/workflows/Python%20Package/badge.svg)
@@ -44,20 +44,21 @@ This package is tested on the following platforms:
 ```
 $ ./venv3.11/bin/ufs -h
 
-usage: ufs [-h] [--version] [-v] [-C DIR] {fetch,noop} ...
+usage: ufs [-h] [--version] [-v] [-C DIR] {build,fetch,noop} ...
 
 A system-bootstrapping automation and introspection tool.
 
 options:
-  -h, --help         show this help message and exit
-  --version          show program's version number and exit
-  -v, --verbose      set to increase logging verbosity
-  -C DIR, --dir DIR  execute from a specific directory
+  -h, --help          show this help message and exit
+  --version           show program's version number and exit
+  -v, --verbose       set to increase logging verbosity
+  -C DIR, --dir DIR   execute from a specific directory
 
 commands:
-  {fetch,noop}       set of available commands
-    fetch            attempt to obtain some software from the internet
-    noop             command stub (does nothing)
+  {build,fetch,noop}  set of available commands
+    build             attempt to build a software project from its sources
+    fetch             attempt to obtain some software from the internet
+    noop              command stub (does nothing)
 
 ```
 
