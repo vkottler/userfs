@@ -2,7 +2,7 @@
     =====================================
     generator=datazen
     version=3.1.2
-    hash=f1c61277d16003f76da1aef24bfda4e4
+    hash=5d4136054395bca0f24e2f01f00c4d04
     =====================================
 -->
 
@@ -44,20 +44,21 @@ This package is tested on the following platforms:
 ```
 $ ./venv3.11/bin/ufs -h
 
-usage: ufs [-h] [--version] [-v] [-C DIR] {fetch,noop} ...
+usage: ufs [-h] [--version] [-v] [-C DIR] {fetch,build,noop} ...
 
 A system-bootstrapping automation and introspection tool.
 
 options:
-  -h, --help         show this help message and exit
-  --version          show program's version number and exit
-  -v, --verbose      set to increase logging verbosity
-  -C DIR, --dir DIR  execute from a specific directory
+  -h, --help          show this help message and exit
+  --version           show program's version number and exit
+  -v, --verbose       set to increase logging verbosity
+  -C DIR, --dir DIR   execute from a specific directory
 
 commands:
-  {fetch,noop}       set of available commands
-    fetch            attempt to obtain some software from the internet
-    noop             command stub (does nothing)
+  {fetch,build,noop}  set of available commands
+    fetch             attempt to obtain some software from the internet
+    build             attempt to build a software project from its sources
+    noop              command stub (does nothing)
 
 ```
 

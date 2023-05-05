@@ -24,7 +24,7 @@ def fetch_cmd(args: _Namespace) -> int:
 
     config = load_config(root=args.config)
     return execute_interactions(
-        interactions, get_projects(args, load_config(root=args.config)), config
+        interactions, get_projects(args, config), config
     )
 
 

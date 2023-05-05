@@ -9,7 +9,9 @@ from pathlib import Path
 from typing import Iterable, NamedTuple
 
 # internal
+from userfs.build import build
 from userfs.config import Config, Interact, ProjectSpecification
+from userfs.deploy import deploy
 from userfs.fetch import fetch
 from userfs.update import update
 
@@ -21,6 +23,14 @@ class ProjectInteraction(Enum):
     UPDATE = auto()
     BUILD = auto()
     DEPLOY = auto()
+
+
+INTERACTIONS = {
+    ProjectInteraction.FETCH: fetch,
+    ProjectInteraction.UPDATE: update,
+    ProjectInteraction.BUILD: build,
+    ProjectInteraction.DEPLOY: deploy,
+}
 
 
 class ProjectInteractionTask(NamedTuple):
@@ -40,11 +50,7 @@ class ProjectInteractionTask(NamedTuple):
 
 def interact(task: ProjectInteractionTask) -> None:
     """Perform a project interaction."""
-
-    if task.kind is ProjectInteraction.FETCH:
-        task.interact(fetch)
-    elif task.kind is ProjectInteraction.UPDATE:
-        task.interact(update)
+    task.interact(INTERACTIONS[task.kind])
 
 
 def execute_interactions(

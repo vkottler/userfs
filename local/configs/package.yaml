@@ -14,3 +14,5 @@ dev_requirements:
 commands:
   - name: fetch
     description: attempt to obtain some software from the internet
+  - name: build
+    description: attempt to build a software project from its sources

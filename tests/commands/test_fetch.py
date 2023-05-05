@@ -11,7 +11,7 @@ from userfs.entry import main as userfs_main
 
 
 def test_fetch_command_basic():
-    """Test the 'fetch' command against the 'empty' scenario."""
+    """Test the 'fetch' command."""
 
     assert userfs_main([PKG_NAME, "fetch"]) == 0
     assert userfs_main([PKG_NAME, "fetch", "-c", str(resource("."))]) == 0
