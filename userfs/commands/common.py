@@ -5,10 +5,11 @@ Common argument-parsing utilities for package commands.
 from argparse import ArgumentParser as _ArgumentParser
 from argparse import Namespace as _Namespace
 from pathlib import Path as _Path
-from typing import Set
+from typing import Iterable, Set
 
 # internal
-from userfs.config import Config
+from userfs.config import Config, ProjectInteraction, load_config
+from userfs.project import execute_interactions
 
 
 def add_common(parser: _ArgumentParser) -> None:
@@ -20,6 +21,21 @@ def add_common(parser: _ArgumentParser) -> None:
         type=_Path,
         help="an optional path to the configuration directory",
     )
+    parser.add_argument(
+        "-a",
+        "--all",
+        action="store_true",
+        help="interact with all configured projects",
+    )
+    parser.add_argument(
+        "-p",
+        "--pattern",
+        default=".*",
+        help=(
+            "a pattern to use to select project "
+            "specifications filtered by name"
+        ),
+    )
 
 
 def get_projects(args: _Namespace, config: Config) -> Set[str]:
@@ -30,4 +46,17 @@ def get_projects(args: _Namespace, config: Config) -> Set[str]:
     else:
         names = set(args.projects)
 
+    # Apply filter.
+
     return names
+
+
+def run_command(
+    interactions: Iterable[ProjectInteraction], args: _Namespace
+) -> int:
+    """Run a project interaction command."""
+
+    config = load_config(root=args.config)
+    return execute_interactions(
+        interactions, get_projects(args, config), config
+    )

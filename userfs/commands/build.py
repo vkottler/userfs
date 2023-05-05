@@ -10,9 +10,8 @@ from argparse import Namespace as _Namespace
 from vcorelib.args import CommandFunction as _CommandFunction
 
 # internal
-from userfs.commands.common import add_common
-from userfs.config import load_config
-from userfs.project import ProjectInteraction, execute_interactions
+from userfs.commands.common import add_common, run_command
+from userfs.config import ProjectInteraction
 
 
 def build_cmd(args: _Namespace) -> int:
@@ -22,8 +21,7 @@ def build_cmd(args: _Namespace) -> int:
     if args.deploy:
         interactions.append(ProjectInteraction.DEPLOY)
 
-    config = load_config(root=args.config)
-    return execute_interactions(interactions, set(args.projects), config)
+    return run_command(interactions, args)
 
 
 def add_build_cmd(parser: _ArgumentParser) -> _CommandFunction:

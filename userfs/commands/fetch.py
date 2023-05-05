@@ -10,9 +10,8 @@ from argparse import Namespace as _Namespace
 from vcorelib.args import CommandFunction as _CommandFunction
 
 # internal
-from userfs.commands.common import add_common, get_projects
-from userfs.config import load_config
-from userfs.project import ProjectInteraction, execute_interactions
+from userfs.commands.common import add_common, run_command
+from userfs.config import ProjectInteraction
 
 
 def fetch_cmd(args: _Namespace) -> int:
@@ -22,22 +21,13 @@ def fetch_cmd(args: _Namespace) -> int:
     if args.update:
         interactions.append(ProjectInteraction.UPDATE)
 
-    config = load_config(root=args.config)
-    return execute_interactions(
-        interactions, get_projects(args, config), config
-    )
+    return run_command(interactions, args)
 
 
 def add_fetch_cmd(parser: _ArgumentParser) -> _CommandFunction:
     """Add fetch-command arguments to its parser."""
 
     add_common(parser)
-    parser.add_argument(
-        "-a",
-        "--all",
-        action="store_true",
-        help="interact with all configured projects",
-    )
     parser.add_argument(
         "-u",
         "--update",
