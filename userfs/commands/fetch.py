@@ -5,39 +5,27 @@ An entry-point for the 'fetch' command.
 # built-in
 from argparse import ArgumentParser as _ArgumentParser
 from argparse import Namespace as _Namespace
-from multiprocessing import Pool
 
 # third-party
 from vcorelib.args import CommandFunction as _CommandFunction
 
 # internal
-from userfs.commands.common import add_common
-from userfs.config import ProjectSpecification, load_config
-
-
-def fetch_project(project: ProjectSpecification) -> None:
-    """Fetch an individual project."""
-
-    print(project.url)
+from userfs.commands.common import add_common, get_projects
+from userfs.config import load_config
+from userfs.project import ProjectInteraction, execute_interactions
 
 
 def fetch_cmd(args: _Namespace) -> int:
     """Execute the fetch command."""
 
+    interactions = [ProjectInteraction.FETCH]
+    if args.update:
+        interactions.append(ProjectInteraction.UPDATE)
+
     config = load_config(root=args.config)
-
-    if args.all:
-        names = set(config.projects.keys())
-    else:
-        names = set(args.projects)
-
-    # Get project references.
-    with Pool() as pool:
-        pool.map(fetch_project, [config.projects[x] for x in names])
-        pool.close()
-        pool.join()
-
-    return 0
+    return execute_interactions(
+        interactions, get_projects(args, load_config(root=args.config)), config
+    )
 
 
 def add_fetch_cmd(parser: _ArgumentParser) -> _CommandFunction:
@@ -48,7 +36,13 @@ def add_fetch_cmd(parser: _ArgumentParser) -> _CommandFunction:
         "-a",
         "--all",
         action="store_true",
-        help="fetch all configured projects",
+        help="interact with all configured projects",
+    )
+    parser.add_argument(
+        "-u",
+        "--update",
+        action="store_true",
+        help="whether or not to also attempt to update project sources",
     )
     parser.add_argument(
         "projects", nargs="*", help="specific projects to fetch"

@@ -5,7 +5,7 @@ A module implementing a configuration interface for the package.
 # built-in
 from os.path import expandvars
 from pathlib import Path
-from typing import Any, Dict, cast
+from typing import Any, Callable, Dict, cast
 
 # third-party
 from rcmpy.xdg import user_config
@@ -18,14 +18,17 @@ from vcorelib.paths import Pathlike, find_file, normalize
 # internal
 from userfs import PKG_NAME
 from userfs.config.project import ProjectSpecification
-from userfs.config.source import SourceSpecification
+from userfs.config.source import SourceKind, SourceSpecification
 from userfs.schemas import UserfsDictCodec as _UserfsDictCodec
 
+Interact = Callable[[Path, ProjectSpecification], None]
 __all__ = [
     "ProjectSpecification",
     "SourceSpecification",
     "Config",
     "load_config",
+    "SourceKind",
+    "Interact",
 ]
 
 

@@ -16,5 +16,6 @@ def test_fetch_command_basic():
     assert userfs_main([PKG_NAME, "fetch"]) == 0
     assert userfs_main([PKG_NAME, "fetch", "-c", str(resource("."))]) == 0
     assert (
-        userfs_main([PKG_NAME, "fetch", "-c", str(resource(".")), "-a"]) == 0
+        userfs_main([PKG_NAME, "fetch", "-c", str(resource(".")), "-a", "-u"])
+        == 0
     )
