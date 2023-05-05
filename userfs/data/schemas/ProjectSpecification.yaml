@@ -1,5 +1,19 @@
 ---
 type: object
 additionalProperties: false
+required: [source, path]
 
-properties: {}
+properties:
+  source:
+    type: string
+
+  path:
+    type: string
+
+  # If not specified, use the key name.
+  repository:
+    type: string
+
+  # Options provided to the source.
+  options:
+    type: object

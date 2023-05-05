@@ -1,2 +1,20 @@
 ---
 directory: tests/data/src
+
+sources:
+  github:
+    # Don't use SSH when testing.
+    protocol: https
+
+projects:
+  config:
+    source: github
+    path: vkottler
+    options:
+      branch: master
+
+  runtimepy:
+    source: github
+    path: vkottler
+    options:
+      branch: master

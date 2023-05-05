@@ -5,6 +5,7 @@ A module implementing a configuration interface for the package.
 # built-in
 from os.path import expandvars
 from pathlib import Path
+from typing import Any, Dict, cast
 
 # third-party
 from rcmpy.xdg import user_config
@@ -16,7 +17,16 @@ from vcorelib.paths import Pathlike, find_file, normalize
 
 # internal
 from userfs import PKG_NAME
+from userfs.config.project import ProjectSpecification
+from userfs.config.source import SourceSpecification
 from userfs.schemas import UserfsDictCodec as _UserfsDictCodec
+
+__all__ = [
+    "ProjectSpecification",
+    "SourceSpecification",
+    "Config",
+    "load_config",
+]
 
 
 class Config(_UserfsDictCodec, _BasicDictCodec):
@@ -30,6 +40,24 @@ class Config(_UserfsDictCodec, _BasicDictCodec):
         self.directory: Path = Path(
             expandvars(str(data["directory"]))
         ).expanduser()
+
+        # Load sources.
+        self.sources: Dict[str, SourceSpecification] = {}
+        for key, source_data in cast(
+            Dict[str, Any], self.data.get("sources", {})
+        ).items():
+            self.sources[key] = SourceSpecification.from_json(source_data)
+
+        # Load projects.
+        self.projects: Dict[str, ProjectSpecification] = {}
+        for key, project_data in cast(
+            Dict[str, Any], self.data.get("projects", {})
+        ).items():
+            source_key: str = project_data["source"]
+            assert source_key in self.sources, f"No source '{source_key}'!"
+            self.projects[key] = ProjectSpecification.from_json(
+                project_data, self.sources[source_key], key
+            )
 
 
 def load_config(root: Pathlike = None, name: str = "config.yaml") -> Config:
