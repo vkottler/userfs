@@ -32,10 +32,6 @@ def build(_: Path, project: ProjectSpecification, __: Dict[str, Any]) -> None:
 
     if project.attributes.get("mk"):
         if project.attributes.get("python"):
-            run_process(
-                project.logger, ["mk", "-C", str(project.location), "dz-sync"]
-            )
-            run_process(
-                project.logger,
-                ["mk", "-C", str(project.location), "python-build"],
-            )
+            loc = str(project.location())
+            run_process(project.logger, ["mk", "-C", loc, "dz-sync"])
+            run_process(project.logger, ["mk", "-C", loc, "python-build"])

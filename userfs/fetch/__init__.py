@@ -28,4 +28,11 @@ def fetch(
             Repo.clone_from(project.url, location, **options)
             project.logger.info("Cloned from '%s' (%s).", url, options)
 
+        repo = Repo(project.location(root=root))
+
+        # Update submodules if specified.
+        if "submodules" in project.attributes:
+            sms = repo.submodules
+            print(sms)
+
     project.logger.info("Location: '%s'.", rel(location))
