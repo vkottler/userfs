@@ -24,3 +24,5 @@ projects:
     attributes:
       python: true
       mk: true
+      submodules:
+        recursive: true

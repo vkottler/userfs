@@ -5,6 +5,7 @@ An entry-point for the 'fetch' command.
 # built-in
 from argparse import ArgumentParser as _ArgumentParser
 from argparse import Namespace as _Namespace
+from os import environ
 
 # third-party
 from vcorelib.args import CommandFunction as _CommandFunction
@@ -21,6 +22,7 @@ def fetch_cmd(args: _Namespace) -> int:
     if args.update:
         interactions.append(ProjectInteraction.UPDATE)
 
+    environ["GIT_PYTHON_TRACE"] = "full"
     return run_command(interactions, args)
 
 
