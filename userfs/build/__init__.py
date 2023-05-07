@@ -27,11 +27,13 @@ def run_process(
     return result
 
 
-def build(_: Path, project: ProjectSpecification, __: Dict[str, Any]) -> None:
+def build(
+    root: Path, project: ProjectSpecification, __: Dict[str, Any]
+) -> None:
     """Build an individual project."""
 
     if project.attributes.get("mk"):
         if project.attributes.get("python"):
-            loc = str(project.location())
+            loc = str(project.location(root=root))
             run_process(project.logger, ["mk", "-C", loc, "dz-sync"])
             run_process(project.logger, ["mk", "-C", loc, "python-build"])

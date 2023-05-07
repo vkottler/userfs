@@ -32,7 +32,11 @@ def fetch(
 
         # Update submodules if specified.
         if "submodules" in project.attributes:
-            sms = repo.submodules
-            print(sms)
+            for submodule in repo.submodules:
+                submodule.update(
+                    recursive=project.attributes["submodules"].get(
+                        "recursive", False
+                    )
+                )
 
     project.logger.info("Location: '%s'.", rel(location))
