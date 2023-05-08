@@ -10,6 +10,9 @@ from pathlib import Path
 import sys
 from typing import Callable, Dict, Iterator, List, Optional, Set, cast
 
+# third-party
+from vcorelib.names import to_snake
+
 # internal
 from userfs.config import Config, Interact, ProjectInteraction
 
@@ -56,7 +59,7 @@ def get_hooks(
         for prefix in prefixes:
             result[prefix] = None
             with suppress(ModuleNotFoundError):
-                mod_name = f"{project}_hooks"
+                mod_name = f"{to_snake(project)}_hooks"
                 LOG.info("Looking for '%s' module.", mod_name)
                 mod = import_module(mod_name)
 

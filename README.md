@@ -2,11 +2,11 @@
     =====================================
     generator=datazen
     version=3.1.2
-    hash=c5009f71cb3f9f2d46e01b7a7fc6f8fd
+    hash=ae6d8345565af8ac9b349c7b95f5091c
     =====================================
 -->
 
-# userfs ([1.0.1](https://pypi.org/project/userfs/))
+# userfs ([1.0.2](https://pypi.org/project/userfs/))
 
 [![python](https://img.shields.io/pypi/pyversions/userfs.svg)](https://pypi.org/project/userfs/)
 ![Build Status](https://github.com/vkottler/userfs/workflows/Python%20Package/badge.svg)

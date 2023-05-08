@@ -5,7 +5,7 @@ description: A system-bootstrapping automation and introspection tool.
 entry: {{entry}}
 requirements:
   - gitPython
-  - vcorelib
+  - vcorelib>=1.6.2
   - rcmpy
 dev_requirements:
   - setuptools-wrapper
