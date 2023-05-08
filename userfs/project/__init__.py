@@ -90,7 +90,7 @@ def execute_interactions(
                         config.directory,
                         config.projects[x],
                         cli_options,
-                        hooks=get_hooks(hook_names, x, interaction, config),
+                        hooks=get_hooks(hook_names, x, interaction),
                         hooks_only=hooks_only,
                     )
                     for x in projects

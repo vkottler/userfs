@@ -10,6 +10,7 @@ from typing import Any, Dict, Iterable, Set, Tuple
 
 # internal
 from userfs.config import Config, ProjectInteraction, load_config
+from userfs.paths import paths_added
 from userfs.project import execute_interactions
 
 
@@ -70,7 +71,7 @@ def get_projects(
     return (
         set(
             filter(
-                lambda x: search(args.pattern, x),
+                lambda x: search(args.pattern, x) and x in config.projects,
                 # Gather the set of projects.
                 set(x for x in args.projects if "=" not in x)
                 if not args.all
@@ -90,10 +91,11 @@ def run_command(
 
     projects, options = get_projects(args, config)
 
-    return execute_interactions(
-        interactions,
-        projects,
-        config,
-        options,
-        hooks_only=args.no_interact,
-    )
+    with paths_added(config.hook_paths):
+        return execute_interactions(
+            interactions,
+            projects,
+            config,
+            options,
+            hooks_only=args.no_interact,
+        )
