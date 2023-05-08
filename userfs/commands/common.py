@@ -28,6 +28,12 @@ def add_common(parser: _ArgumentParser) -> None:
         help="interact with all configured projects",
     )
     parser.add_argument(
+        "-n",
+        "--no-interact",
+        action="store_true",
+        help="don't run package-implemented interactions",
+    )
+    parser.add_argument(
         "-p",
         "--pattern",
         default=".*",
@@ -58,5 +64,8 @@ def run_command(
 
     config = load_config(root=args.config)
     return execute_interactions(
-        interactions, get_projects(args, config), config
+        interactions,
+        get_projects(args, config),
+        config,
+        hooks_only=args.no_interact,
     )

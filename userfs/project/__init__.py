@@ -29,12 +29,22 @@ class ProjectInteractionTask(NamedTuple):
     kind: ProjectInteraction
     root: Path
     project: ProjectSpecification
+    hooks_only: bool = False
 
-    def interact(self, interaction: Interact) -> None:
+    def interact(self, interaction: Interact = None) -> None:
         """Run a project-interaction method."""
 
         self.project.logger.info("Starting '%s'.", self.kind.value)
-        interaction(self.root, self.project, self.project.options[self.kind])
+
+        # try to find pre hook then run?
+
+        if interaction and not self.hooks_only:
+            interaction(
+                self.root, self.project, self.project.options[self.kind]
+            )
+
+        # try to find post hook then run?
+
         self.project.logger.info("Finished '%s'.", self.kind.value)
 
 
@@ -48,15 +58,18 @@ INTERACTIONS = {
 
 def interact(task: ProjectInteractionTask) -> None:
     """Perform a project interaction."""
-    task.interact(INTERACTIONS[task.kind])
+    task.interact(INTERACTIONS.get(task.kind))
 
 
 def execute_interactions(
     interactions: Iterable[ProjectInteraction],
     projects: Iterable[str],
     config: Config,
+    hooks_only: bool = False,
 ) -> int:
     """Execute project interactions in parallel."""
+
+    # Need to find / load a "hooks" module? Pass it to ProjectInteractionTask?
 
     for interaction in interactions:
         with Pool() as pool:
@@ -67,6 +80,7 @@ def execute_interactions(
                         interaction,
                         config.directory,
                         config.projects[x],
+                        hooks_only=hooks_only,
                     )
                     for x in projects
                 ],

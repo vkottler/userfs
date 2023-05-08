@@ -14,5 +14,7 @@ dev_requirements:
 commands:
   - name: build
     description: attempt to build a software project from its sources
+  # - name: custom
+  #   description: perform a custom interaction, sourced from external hooks
   - name: fetch
     description: attempt to obtain some software from the internet
