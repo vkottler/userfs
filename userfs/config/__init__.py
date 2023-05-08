@@ -5,7 +5,7 @@ A module implementing a configuration interface for the package.
 # built-in
 from os.path import expandvars
 from pathlib import Path
-from typing import Any, Callable, Dict, cast
+from typing import Any, Callable, Dict, List, cast
 
 # third-party
 from rcmpy.xdg import user_config
@@ -21,7 +21,19 @@ from userfs.config.project import ProjectInteraction, ProjectSpecification
 from userfs.config.source import SourceKind, SourceSpecification
 from userfs.schemas import UserfsDictCodec as _UserfsDictCodec
 
-Interact = Callable[[Path, ProjectSpecification, Dict[str, Any]], None]
+#
+# def interaction(
+#     root: Path,
+#     project: ProjectSpecification,
+#     interaction_options: Dict[str, Any],
+#     cli_options: Dict[str, Any],
+# ) -> None:
+#     """Project interaction."""
+#
+Interact = Callable[
+    [Path, ProjectSpecification, Dict[str, Any], Dict[str, Any]], None
+]
+
 __all__ = [
     "ProjectInteraction",
     "ProjectSpecification",
@@ -44,6 +56,12 @@ class Config(_UserfsDictCodec, _BasicDictCodec):
         self.directory: Path = Path(
             expandvars(str(data["directory"]))
         ).expanduser()
+
+        # Paths to search for hooks.
+        self.hook_paths: List[Path] = [self.directory.joinpath("hooks")]
+        self.hook_paths.extend(
+            Path(x) for x in data.get("hooks", [])  # type: ignore
+        )
 
         # Load sources.
         self.sources: Dict[str, SourceSpecification] = {}

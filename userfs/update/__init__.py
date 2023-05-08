@@ -16,13 +16,16 @@ from userfs.config import ProjectSpecification
 
 
 def update(
-    root: Path, project: ProjectSpecification, options: Dict[str, Any]
+    root: Path,
+    project: ProjectSpecification,
+    interaction_options: Dict[str, Any],
+    _: Dict[str, Any],
 ) -> None:
     """Update an individual project."""
 
     repo = Repo(project.location(root=root))
 
-    remote_name = options.get("remote", "origin")
+    remote_name = interaction_options.get("remote", "origin")
     if remote_name in repo.remotes:
         remote = repo.remotes[remote_name]
         with suppress(GitCommandError):

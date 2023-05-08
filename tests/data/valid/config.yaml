@@ -1,6 +1,8 @@
 ---
 directory: tests/data/src
 
+hooks: [tests/data/hooks]
+
 sources:
   github:
     # Don't use SSH when testing.

@@ -25,6 +25,7 @@ class ProjectInteraction(Enum):
     UPDATE = "update"
     BUILD = "build"
     DEPLOY = "deploy"
+    CUSTOM = "custom"
 
 
 @dataclass

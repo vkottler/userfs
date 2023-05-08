@@ -5,7 +5,6 @@ An entry-point for the 'fetch' command.
 # built-in
 from argparse import ArgumentParser as _ArgumentParser
 from argparse import Namespace as _Namespace
-from os import environ
 
 # third-party
 from vcorelib.args import CommandFunction as _CommandFunction
@@ -22,7 +21,6 @@ def fetch_cmd(args: _Namespace) -> int:
     if args.update:
         interactions.append(ProjectInteraction.UPDATE)
 
-    environ["GIT_PYTHON_TRACE"] = "full"
     return run_command(interactions, args)
 
 
@@ -35,9 +33,6 @@ def add_fetch_cmd(parser: _ArgumentParser) -> _CommandFunction:
         "--update",
         action="store_true",
         help="whether or not to also attempt to update project sources",
-    )
-    parser.add_argument(
-        "projects", nargs="*", help="specific projects to fetch"
     )
 
     return fetch_cmd
