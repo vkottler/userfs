@@ -37,8 +37,5 @@ def add_build_cmd(parser: _ArgumentParser) -> _CommandFunction:
             "deploy or install the built project assets"
         ),
     )
-    parser.add_argument(
-        "projects", nargs="*", help="specific projects to build"
-    )
 
     return build_cmd

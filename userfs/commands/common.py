@@ -5,14 +5,15 @@ Common argument-parsing utilities for package commands.
 from argparse import ArgumentParser as _ArgumentParser
 from argparse import Namespace as _Namespace
 from pathlib import Path as _Path
-from typing import Iterable, Set
+from re import search
+from typing import Any, Dict, Iterable, Set, Tuple
 
 # internal
 from userfs.config import Config, ProjectInteraction, load_config
 from userfs.project import execute_interactions
 
 
-def add_common(parser: _ArgumentParser) -> None:
+def add_common(parser: _ArgumentParser, projects: bool = True) -> None:
     """Add common command options."""
 
     parser.add_argument(
@@ -43,18 +44,41 @@ def add_common(parser: _ArgumentParser) -> None:
         ),
     )
 
+    if projects:
+        parser.add_argument(
+            "projects",
+            nargs="*",
+            help=(
+                "specific projects to build, arguments in the "
+                "form 'key=value' will be provided as interaction options"
+            ),
+        )
 
-def get_projects(args: _Namespace, config: Config) -> Set[str]:
+
+def get_projects(
+    args: _Namespace, config: Config
+) -> Tuple[Set[str], Dict[str, Any]]:
     """Get a set of projects based on command-line arguments."""
 
-    if args.all:
-        names = set(config.projects.keys())
-    else:
-        names = set(args.projects)
+    # Parse options.
+    opts = {}
+    for opt in set(x for x in args.projects if "=" in x):
+        split = opt.split("=", maxsplit=1)
+        opts[split[0]] = split[1]
 
     # Apply filter.
-
-    return names
+    return (
+        set(
+            filter(
+                lambda x: search(args.pattern, x),
+                # Gather the set of projects.
+                set(x for x in args.projects if "=" not in x)
+                if not args.all
+                else set(config.projects.keys()),
+            )
+        ),
+        opts,
+    )
 
 
 def run_command(
@@ -63,9 +87,13 @@ def run_command(
     """Run a project interaction command."""
 
     config = load_config(root=args.config)
+
+    projects, options = get_projects(args, config)
+
     return execute_interactions(
         interactions,
-        get_projects(args, config),
+        projects,
         config,
+        options,
         hooks_only=args.no_interact,
     )

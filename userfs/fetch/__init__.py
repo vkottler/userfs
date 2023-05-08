@@ -15,7 +15,10 @@ from userfs.config import ProjectSpecification, SourceKind
 
 
 def fetch(
-    root: Path, project: ProjectSpecification, options: Dict[str, Any]
+    root: Path,
+    project: ProjectSpecification,
+    interaction_options: Dict[str, Any],
+    _: Dict[str, Any],
 ) -> None:
     """Fetch an individual project."""
 
@@ -25,8 +28,10 @@ def fetch(
         # Clone the repository.
         if not location.is_dir():
             url = project.url
-            Repo.clone_from(project.url, location, **options)
-            project.logger.info("Cloned from '%s' (%s).", url, options)
+            Repo.clone_from(project.url, location, **interaction_options)
+            project.logger.info(
+                "Cloned from '%s' (%s).", url, interaction_options
+            )
 
         repo = Repo(project.location(root=root))
 

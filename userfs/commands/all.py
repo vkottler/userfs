@@ -1,7 +1,7 @@
 # =====================================
 # generator=datazen
 # version=3.1.2
-# hash=8d592d09e24fbd48e6c5c10d74db740e
+# hash=c3b94c7c029203ccd0bc061a0024237d
 # =====================================
 
 """
@@ -17,6 +17,7 @@ from vcorelib.args import CommandRegister as _CommandRegister
 
 # internal
 from userfs.commands.build import add_build_cmd
+from userfs.commands.custom import add_custom_cmd
 from userfs.commands.fetch import add_fetch_cmd
 
 
@@ -28,6 +29,11 @@ def commands() -> _List[_Tuple[str, str, _CommandRegister]]:
             "build",
             "attempt to build a software project from its sources",
             add_build_cmd,
+        ),
+        (
+            "custom",
+            "perform a custom interaction, sourced from external hooks",
+            add_custom_cmd,
         ),
         (
             "fetch",

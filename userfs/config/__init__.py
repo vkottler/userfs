@@ -21,7 +21,19 @@ from userfs.config.project import ProjectInteraction, ProjectSpecification
 from userfs.config.source import SourceKind, SourceSpecification
 from userfs.schemas import UserfsDictCodec as _UserfsDictCodec
 
-Interact = Callable[[Path, ProjectSpecification, Dict[str, Any]], None]
+#
+# def interaction(
+#     root: Path,
+#     project: ProjectSpecification,
+#     interaction_options: Dict[str, Any],
+#     cli_options: Dict[str, Any],
+# ) -> None:
+#     """Project interaction."""
+#
+Interact = Callable[
+    [Path, ProjectSpecification, Dict[str, Any], Dict[str, Any]], None
+]
+
 __all__ = [
     "ProjectInteraction",
     "ProjectSpecification",

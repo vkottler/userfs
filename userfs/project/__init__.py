@@ -5,7 +5,7 @@ A module for interfacing with projects.
 # built-in
 from multiprocessing import Pool
 from pathlib import Path
-from typing import Iterable, NamedTuple
+from typing import Any, Dict, Iterable, NamedTuple, Optional
 
 # internal
 from userfs.build import build
@@ -17,6 +17,7 @@ from userfs.config import (
 )
 from userfs.deploy import deploy
 from userfs.fetch import fetch
+from userfs.hooks import get_hook
 from userfs.update import update
 
 
@@ -29,21 +30,29 @@ class ProjectInteractionTask(NamedTuple):
     kind: ProjectInteraction
     root: Path
     project: ProjectSpecification
+    cli_options: Dict[str, Any]
     hooks_only: bool = False
+    pre_hook: Optional[Interact] = None
+    post_hook: Optional[Interact] = None
 
     def interact(self, interaction: Interact = None) -> None:
         """Run a project-interaction method."""
 
         self.project.logger.info("Starting '%s'.", self.kind.value)
 
-        # try to find pre hook then run?
+        interactions = [self.pre_hook]
+        if not self.hooks_only:
+            interactions.append(interaction)
+        interactions.append(self.post_hook)
 
-        if interaction and not self.hooks_only:
-            interaction(
-                self.root, self.project, self.project.options[self.kind]
-            )
-
-        # try to find post hook then run?
+        for inter in interactions:
+            if inter is not None:
+                inter(
+                    self.root,
+                    self.project,
+                    self.project.options[self.kind],
+                    self.cli_options,
+                )
 
         self.project.logger.info("Finished '%s'.", self.kind.value)
 
@@ -65,11 +74,10 @@ def execute_interactions(
     interactions: Iterable[ProjectInteraction],
     projects: Iterable[str],
     config: Config,
+    cli_options: Dict[str, Any],
     hooks_only: bool = False,
 ) -> int:
     """Execute project interactions in parallel."""
-
-    # Need to find / load a "hooks" module? Pass it to ProjectInteractionTask?
 
     for interaction in interactions:
         with Pool() as pool:
@@ -80,7 +88,10 @@ def execute_interactions(
                         interaction,
                         config.directory,
                         config.projects[x],
+                        cli_options,
                         hooks_only=hooks_only,
+                        pre_hook=get_hook("pre", x, interaction, config),
+                        post_hook=get_hook("post", x, interaction, config),
                     )
                     for x in projects
                 ],

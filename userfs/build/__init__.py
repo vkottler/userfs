@@ -28,7 +28,10 @@ def run_process(
 
 
 def build(
-    root: Path, project: ProjectSpecification, __: Dict[str, Any]
+    root: Path,
+    project: ProjectSpecification,
+    _: Dict[str, Any],
+    __: Dict[str, Any],
 ) -> None:
     """Build an individual project."""
 

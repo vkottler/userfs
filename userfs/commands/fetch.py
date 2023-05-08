@@ -34,8 +34,5 @@ def add_fetch_cmd(parser: _ArgumentParser) -> _CommandFunction:
         action="store_true",
         help="whether or not to also attempt to update project sources",
     )
-    parser.add_argument(
-        "projects", nargs="*", help="specific projects to fetch"
-    )
 
     return fetch_cmd
