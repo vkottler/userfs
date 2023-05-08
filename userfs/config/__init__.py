@@ -60,7 +60,8 @@ class Config(_UserfsDictCodec, _BasicDictCodec):
         # Paths to search for hooks.
         self.hook_paths: List[Path] = [self.directory.joinpath("hooks")]
         self.hook_paths.extend(
-            Path(x) for x in data.get("hooks", [])  # type: ignore
+            Path(expandvars(x)).expanduser()  # type: ignore
+            for x in data.get("hooks", [])  # type: ignore
         )
 
         # Load sources.
