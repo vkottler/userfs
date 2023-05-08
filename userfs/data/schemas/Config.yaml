@@ -7,6 +7,12 @@ properties:
     type: string
     default: ~/src
 
+  # Paths to search for hook modules.
+  hooks:
+    type: array
+    items:
+      type: string
+
   sources:
     type: object
     additionalProperties: false

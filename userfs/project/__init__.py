@@ -17,7 +17,7 @@ from userfs.config import (
 )
 from userfs.deploy import deploy
 from userfs.fetch import fetch
-from userfs.hooks import get_hook
+from userfs.hooks import get_hooks
 from userfs.update import update
 
 
@@ -31,19 +31,18 @@ class ProjectInteractionTask(NamedTuple):
     root: Path
     project: ProjectSpecification
     cli_options: Dict[str, Any]
+    hooks: Dict[str, Optional[Interact]]
     hooks_only: bool = False
-    pre_hook: Optional[Interact] = None
-    post_hook: Optional[Interact] = None
 
     def interact(self, interaction: Interact = None) -> None:
         """Run a project-interaction method."""
 
         self.project.logger.info("Starting '%s'.", self.kind.value)
 
-        interactions = [self.pre_hook]
+        interactions = [self.hooks.get("pre")]
         if not self.hooks_only:
             interactions.append(interaction)
-        interactions.append(self.post_hook)
+        interactions.append(self.hooks.get("post"))
 
         for inter in interactions:
             if inter is not None:
@@ -79,6 +78,8 @@ def execute_interactions(
 ) -> int:
     """Execute project interactions in parallel."""
 
+    hook_names = {"pre", "post"}
+
     for interaction in interactions:
         with Pool() as pool:
             pool.map(
@@ -89,9 +90,8 @@ def execute_interactions(
                         config.directory,
                         config.projects[x],
                         cli_options,
+                        hooks=get_hooks(hook_names, x, interaction, config),
                         hooks_only=hooks_only,
-                        pre_hook=get_hook("pre", x, interaction, config),
-                        post_hook=get_hook("post", x, interaction, config),
                     )
                     for x in projects
                 ],
