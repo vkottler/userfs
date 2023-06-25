@@ -2,7 +2,7 @@
     =====================================
     generator=datazen
     version=3.1.2
-    hash=c140d059bd4f3630373f891ee3b3cc15
+    hash=bbc21974f8bf18b10f191d582489899c
     =====================================
 -->
 
@@ -23,7 +23,6 @@ See also: [generated documentation](https://vkottler.github.io/python/pydoc/user
 
 This package is tested with the following Python minor versions:
 
-* [`python3.7`](https://docs.python.org/3.7/)
 * [`python3.8`](https://docs.python.org/3.8/)
 * [`python3.9`](https://docs.python.org/3.9/)
 * [`python3.10`](https://docs.python.org/3.10/)
