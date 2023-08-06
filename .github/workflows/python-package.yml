@@ -70,7 +70,7 @@ jobs:
 
       - run: |
           mk python-release owner=vkottler \
-                            repo=userfs version=1.1.1
+                            repo=userfs version=1.1.2
         if: |
           matrix.python-version == '3.11'
           && matrix.system == 'ubuntu-latest'
