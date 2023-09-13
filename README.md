@@ -2,11 +2,11 @@
     =====================================
     generator=datazen
     version=3.1.2
-    hash=937da2931f9c0387ead4e59c8f242a53
+    hash=dc1cf0b80c7df04bc799c2981b83e78f
     =====================================
 -->
 
-# userfs ([1.1.2](https://pypi.org/project/userfs/))
+# userfs ([1.1.3](https://pypi.org/project/userfs/))
 
 [![python](https://img.shields.io/pypi/pyversions/userfs.svg)](https://pypi.org/project/userfs/)
 ![Build Status](https://github.com/vkottler/userfs/workflows/Python%20Package/badge.svg)
@@ -29,8 +29,6 @@
 
 This package is tested with the following Python minor versions:
 
-* [`python3.8`](https://docs.python.org/3.8/)
-* [`python3.9`](https://docs.python.org/3.9/)
 * [`python3.10`](https://docs.python.org/3.10/)
 * [`python3.11`](https://docs.python.org/3.11/)
 
@@ -49,7 +47,8 @@ This package is tested on the following platforms:
 ```
 $ ./venv3.11/bin/ufs -h
 
-usage: ufs [-h] [--version] [-v] [-C DIR] {build,custom,fetch,noop} ...
+usage: ufs [-h] [--version] [-v] [-q] [--curses] [--no-uvloop] [-C DIR]
+           {build,custom,fetch,noop} ...
 
 A system-bootstrapping automation and introspection tool.
 
@@ -57,6 +56,9 @@ options:
   -h, --help            show this help message and exit
   --version             show program's version number and exit
   -v, --verbose         set to increase logging verbosity
+  -q, --quiet           set to reduce output
+  --curses              whether or not to use curses.wrapper when starting
+  --no-uvloop           whether or not to disable uvloop as event loop driver
   -C DIR, --dir DIR     execute from a specific directory
 
 commands:
