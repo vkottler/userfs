@@ -1,6 +1,7 @@
 """
 Common argument-parsing utilities for package commands.
 """
+
 # built-in
 from argparse import ArgumentParser as _ArgumentParser
 from argparse import Namespace as _Namespace
@@ -73,9 +74,11 @@ def get_projects(
             filter(
                 lambda x: search(args.pattern, x) and x in config.projects,
                 # Gather the set of projects.
-                set(x for x in args.projects if "=" not in x)
-                if not args.all
-                else set(config.projects.keys()),
+                (
+                    set(x for x in args.projects if "=" not in x)
+                    if not args.all
+                    else set(config.projects.keys())
+                ),
             )
         ),
         opts,

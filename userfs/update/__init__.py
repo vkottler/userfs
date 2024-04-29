@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any, Dict
 
 # third-party
-from git import Repo  # type: ignore
+from git import Repo
 from git.exc import GitCommandError
 
 # internal

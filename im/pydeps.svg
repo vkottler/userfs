@@ -697,7 +697,7 @@
 <!-- vcorelib_logging -->
 <g id="node31" class="node">
 <title>vcorelib_logging</title><style>.edge>path:hover{stroke-width:8}</style>
-<ellipse fill="#7f19e6" stroke="black" cx="579" cy="-1782.91" rx="41.94" ry="21.43"/>
+<ellipse fill="#7a0ce9" stroke="black" cx="579" cy="-1782.91" rx="41.94" ry="21.43"/>
 <text text-anchor="middle" x="579" y="-1785.91" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#ffffff">vcorelib.</text>
 <text text-anchor="middle" x="579" y="-1774.91" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#ffffff">logging</text>
 </g>
@@ -722,14 +722,14 @@
 <g id="edge78" class="edge">
 <title>vcorelib_logging&#45;&gt;vcorelib_dict</title><style>.edge>path:hover{stroke-width:8}</style>
 <path fill="none" stroke="black" d="M541.56,-1773.23C496.94,-1762.72 420.21,-1744.13 355,-1725.7 351.63,-1724.75 348.16,-1723.73 344.68,-1722.69"/>
-<polygon fill="#7f19e6" stroke="black" points="345.49,-1719.28 334.9,-1719.71 343.44,-1725.97 345.49,-1719.28"/>
+<polygon fill="#7a0ce9" stroke="black" points="345.49,-1719.28 334.9,-1719.71 343.44,-1725.97 345.49,-1719.28"/>
 </g>
 <!-- vcorelib_logging&#45;&gt;vcorelib_io_types -->
 <g id="edge79" class="edge">
 <title>vcorelib_logging&#45;&gt;vcorelib_io_types</title><style>.edge>path:hover{stroke-width:8}</style>
 <path fill="none" stroke="black" d="M620.04,-1778.81C712.89,-1770.22 926.1,-1740.67 861,-1653.7"/>
 <path fill="none" stroke="black" d="M861,-1652.7C837.88,-1621.21 579.27,-1599.9 466.76,-1592.06"/>
-<polygon fill="#7f19e6" stroke="black" points="466.88,-1588.56 456.67,-1591.36 466.4,-1595.54 466.88,-1588.56"/>
+<polygon fill="#7a0ce9" stroke="black" points="466.88,-1588.56 456.67,-1591.36 466.4,-1595.54 466.88,-1588.56"/>
 </g>
 <!-- vcorelib_names -->
 <g id="node32" class="node">
