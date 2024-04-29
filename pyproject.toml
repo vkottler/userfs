@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta:__legacy__"
 
 [project]
 name = "userfs"
-version = "1.1.1"
+version = "1.1.2"
 description = "A system-bootstrapping automation and introspection tool."
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 authors = [
   {name = "Vaughn Kottler", email = "vaughnkottler@gmail.com"}
 ]
@@ -15,10 +15,9 @@ maintainers = [
   {name = "Vaughn Kottler", email = "vaughnkottler@gmail.com"}
 ]
 classifiers = [
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
   "Operating System :: Microsoft :: Windows",
   "Operating System :: MacOS",
   "Operating System :: POSIX :: Linux",
@@ -37,6 +36,10 @@ test = [
   "mypy",
   "isort",
   "yamllint",
+  "yambs",
+  "vmklib",
+  "sphinx",
+  "sphinx-book-theme",
   "setuptools-wrapper",
   "types-setuptools"
 ]

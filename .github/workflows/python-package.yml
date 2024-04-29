@@ -18,10 +18,9 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - "3.8"
-          - "3.9"
           - "3.10"
           - "3.11"
+          - "3.12"
         system:
           - ubuntu-latest
           - macos-latest
@@ -39,7 +38,7 @@ jobs:
           python-version: ${{matrix.python-version}}
           cache: pip
 
-      - run: pip${{matrix.python-version}} install vmklib>=1.8.0
+      - run: pip${{matrix.python-version}} install vmklib
 
       - run: mk python-sa-types
 
@@ -48,11 +47,16 @@ jobs:
         env:
           PY_LINT_MYPY_EXTRA_ARGS: --no-incremental
 
+      - run: mk docs
+        if: |
+          matrix.python-version == '3.11'
+          && matrix.system == 'ubuntu-latest'
+
       - run: mk python-test
         env:
           PY_TEST_EXTRA_ARGS: --cov-report=xml
 
-      - uses: codecov/codecov-action@main
+      - uses: codecov/codecov-action@v3.1.5
 
       - run: mk pypi-upload-ci
         env:
@@ -65,7 +69,7 @@ jobs:
 
       - run: |
           mk python-release owner=vkottler \
-                            repo=userfs version=1.1.1
+                            repo=userfs version=1.1.2
         if: |
           matrix.python-version == '3.11'
           && matrix.system == 'ubuntu-latest'

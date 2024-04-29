@@ -1,12 +1,12 @@
 <!--
     =====================================
     generator=datazen
-    version=3.1.2
-    hash=bbc21974f8bf18b10f191d582489899c
+    version=3.1.4
+    hash=9b38811de81fc061727ebad63e276ac8
     =====================================
 -->
 
-# userfs ([1.1.1](https://pypi.org/project/userfs/))
+# userfs ([1.1.2](https://pypi.org/project/userfs/))
 
 [![python](https://img.shields.io/pypi/pyversions/userfs.svg)](https://pypi.org/project/userfs/)
 ![Build Status](https://github.com/vkottler/userfs/workflows/Python%20Package/badge.svg)
@@ -16,17 +16,22 @@
 
 *A system-bootstrapping automation and introspection tool.*
 
-See also: [generated documentation](https://vkottler.github.io/python/pydoc/userfs.html)
-(created with [`pydoc`](https://docs.python.org/3/library/pydoc.html)).
+## Documentation
+
+### Generated
+
+* By [sphinx-apidoc](https://vkottler.github.io/python/sphinx/userfs)
+(What's [`sphinx-apidoc`](https://www.sphinx-doc.org/en/master/man/sphinx-apidoc.html)?)
+* By [pydoc](https://vkottler.github.io/python/pydoc/userfs.html)
+(What's [`pydoc`](https://docs.python.org/3/library/pydoc.html)?)
 
 ## Python Version Support
 
 This package is tested with the following Python minor versions:
 
-* [`python3.8`](https://docs.python.org/3.8/)
-* [`python3.9`](https://docs.python.org/3.9/)
 * [`python3.10`](https://docs.python.org/3.10/)
 * [`python3.11`](https://docs.python.org/3.11/)
+* [`python3.12`](https://docs.python.org/3.12/)
 
 ## Platform Support
 
@@ -41,9 +46,10 @@ This package is tested on the following platforms:
 # Command-line Options
 
 ```
-$ ./venv3.11/bin/ufs -h
+$ ./venv3.12/bin/ufs -h
 
-usage: ufs [-h] [--version] [-v] [-C DIR] {build,custom,fetch,noop} ...
+usage: ufs [-h] [--version] [-v] [-q] [--curses] [--no-uvloop] [-C DIR]
+           {build,custom,fetch,noop} ...
 
 A system-bootstrapping automation and introspection tool.
 
@@ -51,6 +57,9 @@ options:
   -h, --help            show this help message and exit
   --version             show program's version number and exit
   -v, --verbose         set to increase logging verbosity
+  -q, --quiet           set to reduce output
+  --curses              whether or not to use curses.wrapper when starting
+  --no-uvloop           whether or not to disable uvloop as event loop driver
   -C DIR, --dir DIR     execute from a specific directory
 
 commands:
@@ -69,7 +78,7 @@ commands:
 ### `build`
 
 ```
-$ ./venv3.11/bin/ufs build -h
+$ ./venv3.12/bin/ufs build -h
 
 usage: ufs build [-h] [-c CONFIG] [-a] [-n] [-p PATTERN] [-d] [projects ...]
 
@@ -94,7 +103,7 @@ options:
 ### `custom`
 
 ```
-$ ./venv3.11/bin/ufs custom -h
+$ ./venv3.12/bin/ufs custom -h
 
 usage: ufs custom [-h] [-c CONFIG] [-a] [-n] [-p PATTERN] [projects ...]
 
@@ -117,7 +126,7 @@ options:
 ### `fetch`
 
 ```
-$ ./venv3.11/bin/ufs fetch -h
+$ ./venv3.12/bin/ufs fetch -h
 
 usage: ufs fetch [-h] [-c CONFIG] [-a] [-n] [-p PATTERN] [-u] [projects ...]
 

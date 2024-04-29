@@ -13,3 +13,6 @@ htmlcov
 *-stubs
 coverage*.xml
 tags
+mklocal
+docs
+src
