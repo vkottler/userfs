@@ -1,12 +1,12 @@
 <!--
     =====================================
     generator=datazen
-    version=3.1.2
-    hash=dc1cf0b80c7df04bc799c2981b83e78f
+    version=3.1.4
+    hash=9f7925d85eb960826e86546d7e5531ed
     =====================================
 -->
 
-# userfs ([1.1.3](https://pypi.org/project/userfs/))
+# userfs ([1.1.4](https://pypi.org/project/userfs/))
 
 [![python](https://img.shields.io/pypi/pyversions/userfs.svg)](https://pypi.org/project/userfs/)
 ![Build Status](https://github.com/vkottler/userfs/workflows/Python%20Package/badge.svg)
@@ -31,6 +31,7 @@ This package is tested with the following Python minor versions:
 
 * [`python3.10`](https://docs.python.org/3.10/)
 * [`python3.11`](https://docs.python.org/3.11/)
+* [`python3.12`](https://docs.python.org/3.12/)
 
 ## Platform Support
 
@@ -45,7 +46,7 @@ This package is tested on the following platforms:
 # Command-line Options
 
 ```
-$ ./venv3.11/bin/ufs -h
+$ ./venv3.12/bin/ufs -h
 
 usage: ufs [-h] [--version] [-v] [-q] [--curses] [--no-uvloop] [-C DIR]
            {build,custom,fetch,noop} ...
@@ -77,7 +78,7 @@ commands:
 ### `build`
 
 ```
-$ ./venv3.11/bin/ufs build -h
+$ ./venv3.12/bin/ufs build -h
 
 usage: ufs build [-h] [-c CONFIG] [-a] [-n] [-p PATTERN] [-d] [projects ...]
 
@@ -102,7 +103,7 @@ options:
 ### `custom`
 
 ```
-$ ./venv3.11/bin/ufs custom -h
+$ ./venv3.12/bin/ufs custom -h
 
 usage: ufs custom [-h] [-c CONFIG] [-a] [-n] [-p PATTERN] [projects ...]
 
@@ -125,7 +126,7 @@ options:
 ### `fetch`
 
 ```
-$ ./venv3.11/bin/ufs fetch -h
+$ ./venv3.12/bin/ufs fetch -h
 
 usage: ufs fetch [-h] [-c CONFIG] [-a] [-n] [-p PATTERN] [-u] [projects ...]
 
